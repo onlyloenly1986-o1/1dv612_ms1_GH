@@ -2,13 +2,20 @@ const express = require('express')
 const app = express()
 
 
+// routes
+const rootRoutes = require('./api/routes/rootRouter')
+const orgRoutes = require('./api/routes/orgRouter')
+
+
 app.get('/', (req, res) => {
     res.status(200).json({
         status: '200: OK',
-        message: 'hello world'
+        message: 'hello world this is the startpage for github organisations api'
     })
 })
 
+app.use('/api/v1/', rootRoutes)
+app.use('/api/v1/orgs', orgRoutes)
 
 // catch 404
 app.use((req, res, next) => {
