@@ -1,0 +1,20 @@
+{
+  "name": "1dv612_ms1",
+  "version": "1.0.0",
+  "description": "A microservice-api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "devstart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:ln222tu/1dv612_ms1.git"
+  },
+  "author": "Lone Nilsson",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
