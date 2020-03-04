@@ -1,1 +1,10 @@
-console.log('hello server')
+const http = require('http')
+const app = require('./app')
+
+const port = process.env.PORT || 3000
+
+console.log("server starting...")
+const server = http.createServer(app)
+
+server.listen(port)
+console.log("server is online at localhost:3000")
