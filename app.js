@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
+const fs = require('fs')
 require('dotenv').config()
 
 
@@ -24,8 +26,45 @@ app.get('/', (req, res) => {
     })
 })
 
+// create a jwt for testing this api
+app.get('/api/v1/jwt', (req, res) => {
+    let privateKey= fs.readFileSync('./private.pem', 'utf-8')
+    let token = jwt.sign({body: 'stuff'}, privateKey, {algorithm: 'RS256'})
+
+    res.status(200).json({
+        status: '200: OK',
+        message: 'this is your test-token',
+        token: token
+    })
+})
+
+
+// TODO place in i a middleware-folder
+function isAuthorized(req, res, next) {
+    
+    if(typeof req.headers.authorization !== 'undefined') {
+        let token = req.headers.authorization.split(' ')[1]
+        
+        //TODO how to make this from other login-accounts??
+        let privateKey= fs.readFileSync('./private.pem', 'utf-8')
+        jwt.verify(token, privateKey, { algorithm: "RS256"}, (err, decoded) => {
+            if (err) {
+                // TODO check status later
+                res.status(500).json({error: err})
+            }
+            console.log(decoded)
+            next()
+        })
+    } else {
+        res.status(403).json({
+            status: '403: Forbidden',
+            message: 'You have to be authorized for this, pass through a jwt for the user',
+            error: "Not authorized"})
+    }
+}
+
 app.use('/api/v1/', rootRoutes)
-app.use('/api/v1/orgs', orgRoutes)
+app.use('/api/v1/orgs', isAuthorized, orgRoutes)
 app.use('/api/v1/repos', repoRoutes)
 
 // catch 404

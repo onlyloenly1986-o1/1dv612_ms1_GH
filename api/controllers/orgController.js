@@ -92,4 +92,12 @@ exports.getOrgs = async (req, res, next) => {
 }
 
 exports.getOneOrg = async (req, res, next) => {
+    const orgName = req.params.org
+    res.status(200).json({
+        status: '200: OK',
+        message: 'Here is everything about one org',
+        repo: orgName,
+        _links: {
+        }
+    })
 }

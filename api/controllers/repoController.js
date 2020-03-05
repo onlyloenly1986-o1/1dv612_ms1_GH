@@ -65,4 +65,12 @@ exports.getRepos = async (req, res, next) => {
 }
 
 exports.getOneRepo =  async (req, res, next) => {
+    const repoName = req.params.repo
+    res.status(200).json({
+        status: '200: OK',
+        message: 'Here is everything about one repo',
+        repo: repoName,
+        _links: {
+        }
+    })
 }
