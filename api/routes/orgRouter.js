@@ -5,8 +5,7 @@ const orgController = require('../controllers/orgController')
 
 router.get('/', orgController.getOrgs)
 
-router.get('/repos', orgController.getRepos)
+router.get('/:org', orgController.getOneOrg)
 
-// router.post('/', orgController.registerUser)
 
 module.exports = router

@@ -8,6 +8,7 @@ require('dotenv').config()
 // routes
 const rootRoutes = require('./api/routes/rootRouter')
 const orgRoutes = require('./api/routes/orgRouter')
+const repoRoutes = require('./api/routes/repoRouter')
 
 // logger middleware
 app.use(morgan('dev'))
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/', rootRoutes)
 app.use('/api/v1/orgs', orgRoutes)
+app.use('/api/v1/repos', repoRoutes)
 
 // catch 404
 app.use((req, res, next) => {
