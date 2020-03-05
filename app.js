@@ -1,11 +1,20 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
+const bodyParser = require('body-parser')
+require('dotenv').config()
 
 
 // routes
 const rootRoutes = require('./api/routes/rootRouter')
 const orgRoutes = require('./api/routes/orgRouter')
 
+// logger middleware
+app.use(morgan('dev'))
+
+// body parser middleware
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.status(200).json({

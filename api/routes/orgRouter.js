@@ -3,7 +3,7 @@ const router = express.Router()
 
 const orgController = require('../controllers/orgController')
 
-router.get('/', orgController.getPage)
+router.get('/', orgController.getOrgs)
 
 // router.post('/', orgController.registerUser)
 
