@@ -22,14 +22,14 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
     res.status(200).json({
         status: '200: OK',
-        message: 'hello world this is the startpage for github organisations api'
+        message: 'Hello World this is the startpage for github organisations api'
     })
 })
 
 // create a jwt for testing this api
 app.get('/api/v1/jwt', (req, res) => {
     let privateKey= fs.readFileSync('./private.pem', 'utf-8')
-    let token = jwt.sign({body: 'stuff'}, privateKey, {algorithm: 'RS256'})
+    let token = jwt.sign({body: 'stuff'}, privateKey, {algorithm: 'HS256'})
 
     res.status(200).json({
         status: '200: OK',
@@ -47,7 +47,7 @@ function isAuthorized(req, res, next) {
         
         //TODO how to make this from other login-accounts??
         let privateKey= fs.readFileSync('./private.pem', 'utf-8')
-        jwt.verify(token, privateKey, { algorithm: "RS256"}, (err, decoded) => {
+        jwt.verify(token, privateKey, { algorithm: "HS256"}, (err, decoded) => {
             if (err) {
                 // TODO check status later
                 res.status(500).json({error: err})
@@ -65,7 +65,7 @@ function isAuthorized(req, res, next) {
 
 app.use('/api/v1/', rootRoutes)
 app.use('/api/v1/orgs', isAuthorized, orgRoutes)
-app.use('/api/v1/repos', repoRoutes)
+app.use('/api/v1/repos', isAuthorized, repoRoutes)
 
 // catch 404
 app.use((req, res, next) => {
