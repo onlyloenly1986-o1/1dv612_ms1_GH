@@ -7,4 +7,4 @@ console.log("server starting...")
 const server = http.createServer(app)
 
 server.listen(port)
-console.log("server is online at localhost:3000")
+console.log(`server is online at ${port}`)

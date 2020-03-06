@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
     res.status(200).json({
         status: '200: OK',
-        message: 'Hello World this is the startpage for github organisations api'
+        message: 'Hello World this is the startpage for github organisations api. Go to /api/v1 to se what the api offers'
     })
 })
 
