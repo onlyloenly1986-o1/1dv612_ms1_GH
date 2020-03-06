@@ -1,0 +1,57 @@
+swagger: "2.0"
+
+info:
+  version: 2.0
+  title: API
+  description: |
+      This is a swagger description over this organisations api
+  
+host: localhost:3000
+
+basePath: /api/v1
+
+schemes: http
+
+consumes:
+    - application/json
+    
+produces:
+    - application/json
+    
+paths:
+  /:
+    get:
+      description: Returns the first api page
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: A root directory over other requestpaths
+          schema:
+            type: json
+              
+  /orgs:
+    get:
+      description: Returns all organisations on a specific github user
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: A list of orgs.
+          schema:
+            type: json
+            
+  /repos:
+    get:
+      description: Returns all repos on a specific github user
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: A list of repos.
+          schema:
+            type: json
+            
+              
+
+
